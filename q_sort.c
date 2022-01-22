@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:05:09 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/21 16:17:53 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/22 15:18:25 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	pivot_sort(int r, t_element *a)
 	a = a->next;
 	q_sort(arr, 0, r - 1);
 	temp = arr[r/2];
-	free(arr);
-	arr = 0;
+//	free(arr);
+//	arr = 0;
 	return (temp);
 }

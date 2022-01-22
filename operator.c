@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:58:53 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/21 16:19:18 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/22 13:28:15 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	pab(t_element **ab, t_element **ba, char *com)
 */
 
 
-void	pab(t_element **b, t_element **a, char *com)
+void	pab(t_element **b, t_element **a, char *com) //pb 기준
 {
 	t_element *temp;
 

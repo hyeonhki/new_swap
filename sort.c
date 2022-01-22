@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:57:34 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/21 16:31:38 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/22 15:17:52 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	sort_three(t_element **a)
 	int	max;
 	int	min;
 
+//	printf("check\n");
 	find_maxmin(3, *a, &max, &min);
 	if ((*a)->val == min)
 	{
@@ -98,7 +99,10 @@ void	btoa(int r, int flag, t_element **a, t_element **b)
 	int	rb_cnt;
 	int	pa_cnt;
 
+//	printf("a->prev %d\n",(*a)->prev->val);
 	flag = r_range(r, b);
+	if (r == 0)
+		return ;
 	if (r == 1)
 	{
 		pab(a, b, "pa");
@@ -114,7 +118,10 @@ void	btoa(int r, int flag, t_element **a, t_element **b)
 	}
 	rb_cnt = 0;
 	pa_cnt = 0;
+//	printf("a->prev %d\n",(*a)->prev->val);
 	p = pivot_sort(r, *b);
+//	p = (*b)->val;
+//	printf("a->prev %d\n",(*a)->prev->val);
 	while (r-- > 0)
 	{
 		if ((*b)->val < p)
@@ -124,16 +131,21 @@ void	btoa(int r, int flag, t_element **a, t_element **b)
 		}
 		else
 		{
+//			printf("a->prev %d\n",(*a)->prev->val);
 			pab(a, b, "pa");
 			pa_cnt++;
 		}
+	//	check_stack(*a, *b);
 	}
 	i = rb_cnt;
 	while (i-- > 0 && flag != 0)
 		rrab(b, "rrb");
-	printf("pa %d rb %d\n",pa_cnt,rb_cnt);
-//	atob(pa_cnt, flag, a, b);
-//	btoa(rb_cnt, flag, a, b);
+//	printf("pa %d rb %d\n",pa_cnt,rb_cnt);
+//	check_stack(*a, *b);
+	if (rb_cnt == 0)
+		sab(a, "sa");
+	atob(pa_cnt, flag, a, b);
+	btoa(rb_cnt, flag, a, b);
 }
 
 void	atob(int r, int flag, t_element **a, t_element **b)
@@ -143,6 +155,8 @@ void	atob(int r, int flag, t_element **a, t_element **b)
 	int	ra_cnt;
 	int	pb_cnt;
 
+	if (r == 0)
+		return ;
 	flag = r_range(r, a);
 	if (check_sort(r, *a) == 1)
 		return ;
@@ -153,6 +167,8 @@ void	atob(int r, int flag, t_element **a, t_element **b)
 	ra_cnt = 0;
 	pb_cnt = 0;
 	i = 0;
+//	printf("check\n");
+//	p = (*a)->val;
 	p = pivot_sort(r, *a);
 	while (r-- > 0)
 	{
@@ -167,12 +183,13 @@ void	atob(int r, int flag, t_element **a, t_element **b)
 			pb_cnt++;
 		}
 	}
-	check_stack(*a, *b);
+//	check_stack(*a, *b);
 	i = ra_cnt;
 	while (i-- > 0 && flag != 0)
 		rrab(a, "rra");
-	printf("ra %d pb %d\n",ra_cnt,pb_cnt);
+//	printf("ra %d pb %d\n",ra_cnt,pb_cnt);
+//	printf("a->prev %d\n",(*a)->prev->val);
 //	check_stack(*a, *b);
-//	atob(ra_cnt, flag, a, b);
-//	btoa(pb_cnt, flag, a, b);
+	atob(ra_cnt, flag, a, b);
+	btoa(pb_cnt, flag, a, b);
 }
