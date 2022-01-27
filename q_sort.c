@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:05:09 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/22 15:18:25 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/27 18:35:59 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,17 @@ void	q_sort(int *arr, int left, int right)
 	}
 }
 
-int	pivot_sort(int r, t_element *a)
+void	pivot_sort(int *p, int r, t_element *a)
 {
 	int	i;
 	int	j;
-	int	temp;
 	int	*arr;
+	int	cnt;
 
 	i = a->val;
 	j = 0;
-	temp = 0;
+	*p = 0;
+	cnt = 0;
 	arr = (int *)malloc(r * sizeof(int));
 	while (1)
 	{
@@ -76,11 +77,16 @@ int	pivot_sort(int r, t_element *a)
 			arr[j++] = a->val;
 			break ;
 		}
+		cnt++;
 	}
-	a = a->next;
+	while (cnt >= 0)
+	{
+		a = a->prev;
+		cnt--;
+	}
 	q_sort(arr, 0, r - 1);
-	temp = arr[r/2];
+	*p = arr[r / 2];
 //	free(arr);
 //	arr = 0;
-	return (temp);
+//	free(arr);
 }

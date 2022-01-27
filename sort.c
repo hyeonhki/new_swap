@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:57:34 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/22 15:17:52 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/27 18:50:08 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	btoa(int r, int flag, t_element **a, t_element **b)
 	int	pa_cnt;
 
 //	printf("a->prev %d\n",(*a)->prev->val);
-	flag = r_range(r, b);
+//	flag = 1;
 	if (r == 0)
 		return ;
 	if (r == 1)
@@ -116,10 +116,13 @@ void	btoa(int r, int flag, t_element **a, t_element **b)
 			sab(a, "sa");
 		return ;
 	}
+	flag = r_range(r, b);
 	rb_cnt = 0;
 	pa_cnt = 0;
 //	printf("a->prev %d\n",(*a)->prev->val);
-	p = pivot_sort(r, *b);
+	pivot_sort(&p, r, *b);
+//	printf("p : %d\n",p);
+//	p = pivot_sort(r, *b);
 //	p = (*b)->val;
 //	printf("a->prev %d\n",(*a)->prev->val);
 	while (r-- > 0)
@@ -142,11 +145,13 @@ void	btoa(int r, int flag, t_element **a, t_element **b)
 		rrab(b, "rrb");
 //	printf("pa %d rb %d\n",pa_cnt,rb_cnt);
 //	check_stack(*a, *b);
-	if (rb_cnt == 0)
-		sab(a, "sa");
+//	if (rb_cnt == 0)
+	//	sab(a, "sa");
+//	check_stack(*a, *b);
 	atob(pa_cnt, flag, a, b);
 	btoa(rb_cnt, flag, a, b);
 }
+
 
 void	atob(int r, int flag, t_element **a, t_element **b)
 {
@@ -157,19 +162,19 @@ void	atob(int r, int flag, t_element **a, t_element **b)
 
 	if (r == 0)
 		return ;
-	flag = r_range(r, a);
 	if (check_sort(r, *a) == 1)
 		return ;
-	else if (r == 2 && (*a)->val > (*a)->next->val)
+	if (r == 2 && (*a)->val > (*a)->next->val)
 		return (sab(a, "sa"));
-	else if (r == 3 && flag == 0)
+	flag = r_range(r, a);
+	if (r == 3 && flag == 0)
 		return (sort_three(a));
 	ra_cnt = 0;
 	pb_cnt = 0;
 	i = 0;
 //	printf("check\n");
 //	p = (*a)->val;
-	p = pivot_sort(r, *a);
+	pivot_sort(&p, r, *a);
 	while (r-- > 0)
 	{
 		if ((*a)->val > p)
