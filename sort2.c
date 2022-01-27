@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:45:06 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/27 19:06:59 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/27 19:49:42 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ void	change_pivot(int r, int *p, t_element **ab, char flag)
 	*p = (*ab)->prev->val;
 }
 
-/*
+
 void	sort_three_flag(t_element **a)
 {
 	int	max;
 	int	min;
 	
-	find_maxmin(a, &max, &min);
+	find_maxmin(3, *a, &max, &min);
 	if ((*a)->val == min)
 	{
 		rab(a, "ra");
@@ -61,7 +61,7 @@ void	sort_three_flag(t_element **a)
 	if ((*a)->val != min)
 		sab(a, "sa");
 }
-*/
+
 
 int	get_pivot(int r, t_element *a)
 {
@@ -88,6 +88,32 @@ int	get_pivot(int r, t_element *a)
 	return (p);
 }
 
+int	r_range2(int r, t_element *b)
+{
+	int	i;
+	int	k;
+	int	ret;
+
+	
+	k = 1;
+	i = b->val;
+	while (k < r)
+	{
+		b = b->next;
+		k++;
+	}
+	if (b->next->val == i)
+		ret = 0;
+	else
+		ret = 1;
+	while (k > 1)
+	{
+		b = b->prev;
+		k--;
+	}
+	return (ret);
+}
+
 void	B_to_A(int r, int *flag, t_element **a, t_element **b)
 {
 	int p;
@@ -103,6 +129,7 @@ void	B_to_A(int r, int *flag, t_element **a, t_element **b)
 		pab(a, b, "pa");
 		return ;
 	}
+	*flag = r_range2(r, *b);
 	temp = *b;
 	rb_cnt = 0;
 	pa_cnt = 0;
@@ -129,7 +156,7 @@ void	B_to_A(int r, int *flag, t_element **a, t_element **b)
 		r--;
 	}
 	i = rb_cnt;
-	while (i-- > 0)
+	while (i-- > 0 && *flag != 0)
 		rrab(b, "rrb");
 //	printf("check\n");
 	*flag = 1;
@@ -145,7 +172,9 @@ void	A_to_B(int r, int *flag, t_element **a, t_element **b)
 	int ra_cnt;
 	int pb_cnt;
 
-//	printf("A - r %d\n",r);
+	if (r == 0)
+		return ;
+	*flag = r_range2(r, *a);
 	if (check_sort(r, *a) == 1)
 		return ;
 	else if (r == 2 && (*a)->val > (*a)->next->val)
@@ -154,15 +183,17 @@ void	A_to_B(int r, int *flag, t_element **a, t_element **b)
 			sab(a, "sa");
 		return ;
 	}
-	else if (r == 3 && flag == 0)
+	else if (r == 3)
 	{
-		return (sort_three(a));
-	//	else
-	//		return (sort_three_flag(a));
+		if (*flag == 0)
+			return (sort_three(a));
+//		else
+//			return (sort_three_flag(a));
 	}
 	ra_cnt = 0;
 	pb_cnt = 0;
 //	p = (*a)->val; //피봇 맨앞으로 옮김
+//	pivot_sort(&p, r, *a);
 	p = get_pivot(r, *a);
 	i = r;
 //	printf("r %d p %d\n",r,p);

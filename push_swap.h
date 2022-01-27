@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:28:29 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/27 18:56:31 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/27 19:26:52 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	rrab(t_element **ab, char *com);
 void	rrr(t_element **a, t_element **b);
 void	ss(t_element **a, t_element **b);
 void	rr(t_element **a, t_element **b);
-
 
 void	atob(int r, int flag, t_element **a, t_element **b);
 void	sort_three(t_element **a);

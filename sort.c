@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:57:34 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/27 18:50:08 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/27 19:31:50 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	r_range(int r, t_element **b)
 	int	i;
 	int	k;
 	int	ret;
+
+	
 
 	k = 1;
 	i = (*b)->prev->val;
