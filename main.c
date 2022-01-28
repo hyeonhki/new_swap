@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:25:59 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/29 00:05:46 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/29 01:14:13 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	check_stack(t_element *a, t_element *b)
 
 void	stack_free(int r, t_element **ab)
 {
-	t_element *next;
+	t_element	*next;
 
 	while (r > 0)
 	{
@@ -65,8 +65,8 @@ int	main(int nb, char **arg)
 	t_element	*a;
 	t_element	*b;
 	t_program	prgm;
-	int		flag;
-	int		*arr;
+	int			flag;
+	int			*arr;
 
 	a = NULL;
 	b = NULL;
@@ -76,9 +76,7 @@ int	main(int nb, char **arg)
 	if (error_check(&prgm, nb, a) == 1)
 		return (0);
 	flag = 0;
-	A_to_B(nb - 1, &flag, &a, &b, arr);
+	atob(nb - 1, &flag, &a, &b, arr);
 	free(arr);
-//	check_stack(a, b);
-	system("leaks push_swap | grep \"total leaked\"");
 	return (0);
 }

@@ -6,94 +6,18 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:45:06 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/29 00:04:51 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/29 01:16:44 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	A_to_B(int r, int *flag, t_element **a, t_element **b, int arr[]);
-void	B_to_A(int r, int *flag, t_element **a, t_element **b, int arr[]);
-void	change_pivot(int r, int *p, t_element **ab, char flag);
-
-void	change_pivot(int r, int *p, t_element **ab, char flag)
-{
-	t_element *temp;
-	int i;
-
-	i = r;
-	temp = *ab;
-	while (i - 1 > 0)
-	{
-		temp = temp->next;
-		i--;
-	}
-	if (temp->val != (*ab)->prev->val)
-		return ;
-	while (i++ <= r)
-		temp = temp->prev;
-	if (flag == 'a')
-		rab(ab, "ra");
-	if (flag == 'b')
-		rab(ab, "rb");
-	*p = (*ab)->prev->val;
-}
-
-
-void	sort_three_flag(t_element **a)
-{
-	int	max;
-	int	min;
-	
-	find_maxmin(3, *a, &max, &min);
-	if ((*a)->val == min)
-	{
-		rab(a, "ra");
-		sab(a, "sa");
-		rrab(a, "rra");
-		return ;
-	}
-	else if ((*a)->next->val != max)
-	sab(a, "sa");
-	rab(a, "ra");
-	sab(a, "sa");
-	rrab(a, "rra");
-	if ((*a)->val != min)
-		sab(a, "sa");
-}
-
-int	get_pivot(int r, t_element *a)
-{
-	int i;
-	int p;
-	int cnt;
-	t_element	*temp;
-	t_element	*temp2;
-
-	temp = a;
-	temp2 = a;
-	p = temp->val;
-	cnt = 0;
-	i = 0;
-	while (i < r || i < 10)
-	{
-		if (p < temp->val)
-			cnt += 1;
-		if (cnt == 2)
-			return (p);
-		temp = temp->next;
-		i++;
-	}
-	return (p);
-}
-
-int	r_range2(int r, t_element *b)
+int	r_range(int r, t_element *b)
 {
 	int	i;
 	int	k;
 	int	ret;
 
-	
 	k = 1;
 	i = b->val;
 	while (k < r)
@@ -113,13 +37,12 @@ int	r_range2(int r, t_element *b)
 	return (ret);
 }
 
-void	B_to_A(int r, int *flag, t_element **a, t_element **b, int arr[])
+void	btoa(int r, int *flag, t_element **a, t_element **b, int arr[])
 {
-	int p;
-	int i;
-	int rb_cnt;
-	int pa_cnt;
-	t_element *temp;
+	int			p;
+	int			i;
+	int			rb_cnt;
+	int			pa_cnt;
 
 	if (r == 0)
 		return ;
@@ -128,20 +51,11 @@ void	B_to_A(int r, int *flag, t_element **a, t_element **b, int arr[])
 		pab(a, b, "pa");
 		return ;
 	}
-	*flag = r_range2(r, *b);
-	temp = *b;
+	*flag = r_range(r, *b);
 	rb_cnt = 0;
 	pa_cnt = 0;
 	i = r - 1;
-	while (i-- > 0)
-		temp = temp->next;	
 	pivot_sort(arr, &p, r, *b);
-//	p = (*b)->val; //피봇 맨앞으로 옮김
-//	p = get_pivot(r, *b);
-//	printf("r %d p %d\n",r,p);
-//	printf("B - p %d\n",p);
-//	if ((*b)->val < p)
-//		change_pivot(r, &p, b, 'b');
 	while (r > 0)
 	{
 		if ((*b)->val < p)
@@ -159,25 +73,23 @@ void	B_to_A(int r, int *flag, t_element **a, t_element **b, int arr[])
 	i = rb_cnt;
 	while (i-- > 0 && *flag != 0)
 		rrab(b, "rrb");
-//	printf("check\n");
 	*flag = 1;
-//	check_stack(*a, *b);
-	A_to_B(pa_cnt, flag, a, b, arr);
-	B_to_A(rb_cnt, flag, a, b, arr);
+	atob(pa_cnt, flag, a, b, arr);
+	btoa(rb_cnt, flag, a, b, arr);
 }
 
-void	A_to_B(int r, int *flag, t_element **a, t_element **b, int arr[])
+void	atob(int r, int *flag, t_element **a, t_element **b, int arr[])
 {
-	int p;
-	int i;
-	int ra_cnt;
-	int pb_cnt;
+	int	p;
+	int	i;
+	int	ra_cnt;
+	int	pb_cnt;
 
 	if (r == 0)
 		return ;
 	if (check_sort(r, *a) == 1)
 		return ;
-	*flag = r_range2(r, *a);
+	*flag = r_range(r, *a);
 	if (r == 2 && (*a)->val > (*a)->next->val)
 	{
 		if ((*a)->val > (*a)->next->val)
@@ -188,22 +100,17 @@ void	A_to_B(int r, int *flag, t_element **a, t_element **b, int arr[])
 	{
 		if (*flag == 0)
 			return (sort_three(a));
-//		else
-//			return (sort_three_flag(a));
 	}
 	ra_cnt = 0;
 	pb_cnt = 0;
-//	p = (*a)->val; //피봇 맨앞으로 옮김
 	pivot_sort(arr, &p, r, *a);
-//	p = get_pivot(r, *a);
 	i = r;
-//	printf("r %d p %d\n",r,p);
 	while (i > 0)
 	{
 		if ((*a)->val > p)
 		{
-				rab(a, "ra");	
-				ra_cnt++;
+			rab(a, "ra");
+			ra_cnt++;
 		}
 		else
 		{
@@ -213,14 +120,10 @@ void	A_to_B(int r, int *flag, t_element **a, t_element **b, int arr[])
 		i--;
 	}
 	if (ra_cnt == 0)
-			sab(b, "sb");
-//	if (pb_cnt == 0)
-//			*a = sab(a, "sa");
+		sab(b, "sb");
 	i = ra_cnt;
-//	if (ra_cnt > 1 && j + 1 != ra_cnt)
-		while (i-- > 0 && *flag != 0)
-			rrab(a, "rra");
-//	check_stack(*a, *b);
-	A_to_B(ra_cnt, flag, a, b, arr); //마지막자리 피봇을 ra 안해주기로 했기에 + 1
-	B_to_A(pb_cnt, flag, a, b, arr);
+	while (i-- > 0 && *flag != 0)
+		rrab(a, "rra");
+	atob(ra_cnt, flag, a, b, arr);
+	btoa(pb_cnt, flag, a, b, arr);
 }
