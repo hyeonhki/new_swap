@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:25:59 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/27 19:50:08 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/29 00:05:46 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,19 @@ int	main(int nb, char **arg)
 	t_element	*b;
 	t_program	prgm;
 	int		flag;
+	int		*arr;
 
 	a = NULL;
 	b = NULL;
+	arr = (int *)malloc((nb - 1) * sizeof(int));
 	prgm_init(&prgm);
 	a = stack_init(nb, arg, &prgm);
 	if (error_check(&prgm, nb, a) == 1)
 		return (0);
 	flag = 0;
-	A_to_B(nb - 1, &flag, &a, &b);
+	A_to_B(nb - 1, &flag, &a, &b, arr);
+	free(arr);
 //	check_stack(a, b);
-//	system("leaks push_swap | grep \"total leaked\"");
+	system("leaks push_swap | grep \"total leaked\"");
 	return (0);
 }

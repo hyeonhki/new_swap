@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:28:29 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/27 19:26:52 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/29 00:02:42 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_element
 	struct s_element	*prev;
 }				t_element;
 
-void	A_to_B(int r, int *flag, t_element **a, t_element **b);
+void	A_to_B(int r, int *flag, t_element **a, t_element **b, int arr[]);
 
 unsigned int		my_strlen(const char *str, t_program *prgm);
 int					my_getnbr(char *str, t_program *prgm);
@@ -60,7 +60,7 @@ int	check_sort(int r, t_element *temp);
 void	btoa(int r, int flag, t_element **a, t_element **b);
 
 
-void	pivot_sort(int *p, int r, t_element *a);
+void	pivot_sort(int arr[], int *p, int r, t_element *a);
 
 void	check_stack(t_element *a, t_element *b);
 

@@ -6,14 +6,14 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:45:06 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/27 19:49:42 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/29 00:04:51 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	A_to_B(int r, int *flag, t_element **a, t_element **b);
-void	B_to_A(int r, int *flag, t_element **a, t_element **b);
+void	A_to_B(int r, int *flag, t_element **a, t_element **b, int arr[]);
+void	B_to_A(int r, int *flag, t_element **a, t_element **b, int arr[]);
 void	change_pivot(int r, int *p, t_element **ab, char flag);
 
 void	change_pivot(int r, int *p, t_element **ab, char flag)
@@ -61,7 +61,6 @@ void	sort_three_flag(t_element **a)
 	if ((*a)->val != min)
 		sab(a, "sa");
 }
-
 
 int	get_pivot(int r, t_element *a)
 {
@@ -114,7 +113,7 @@ int	r_range2(int r, t_element *b)
 	return (ret);
 }
 
-void	B_to_A(int r, int *flag, t_element **a, t_element **b)
+void	B_to_A(int r, int *flag, t_element **a, t_element **b, int arr[])
 {
 	int p;
 	int i;
@@ -136,7 +135,9 @@ void	B_to_A(int r, int *flag, t_element **a, t_element **b)
 	i = r - 1;
 	while (i-- > 0)
 		temp = temp->next;	
-	p = (*b)->val; //피봇 맨앞으로 옮김
+	pivot_sort(arr, &p, r, *b);
+//	p = (*b)->val; //피봇 맨앞으로 옮김
+//	p = get_pivot(r, *b);
 //	printf("r %d p %d\n",r,p);
 //	printf("B - p %d\n",p);
 //	if ((*b)->val < p)
@@ -161,11 +162,11 @@ void	B_to_A(int r, int *flag, t_element **a, t_element **b)
 //	printf("check\n");
 	*flag = 1;
 //	check_stack(*a, *b);
-	A_to_B(pa_cnt, flag, a, b);
-	B_to_A(rb_cnt, flag, a, b);
+	A_to_B(pa_cnt, flag, a, b, arr);
+	B_to_A(rb_cnt, flag, a, b, arr);
 }
 
-void	A_to_B(int r, int *flag, t_element **a, t_element **b)
+void	A_to_B(int r, int *flag, t_element **a, t_element **b, int arr[])
 {
 	int p;
 	int i;
@@ -174,10 +175,10 @@ void	A_to_B(int r, int *flag, t_element **a, t_element **b)
 
 	if (r == 0)
 		return ;
-	*flag = r_range2(r, *a);
 	if (check_sort(r, *a) == 1)
 		return ;
-	else if (r == 2 && (*a)->val > (*a)->next->val)
+	*flag = r_range2(r, *a);
+	if (r == 2 && (*a)->val > (*a)->next->val)
 	{
 		if ((*a)->val > (*a)->next->val)
 			sab(a, "sa");
@@ -193,8 +194,8 @@ void	A_to_B(int r, int *flag, t_element **a, t_element **b)
 	ra_cnt = 0;
 	pb_cnt = 0;
 //	p = (*a)->val; //피봇 맨앞으로 옮김
-//	pivot_sort(&p, r, *a);
-	p = get_pivot(r, *a);
+	pivot_sort(arr, &p, r, *a);
+//	p = get_pivot(r, *a);
 	i = r;
 //	printf("r %d p %d\n",r,p);
 	while (i > 0)
@@ -220,6 +221,6 @@ void	A_to_B(int r, int *flag, t_element **a, t_element **b)
 		while (i-- > 0 && *flag != 0)
 			rrab(a, "rra");
 //	check_stack(*a, *b);
-	A_to_B(ra_cnt, flag, a, b); //마지막자리 피봇을 ra 안해주기로 했기에 + 1
-	B_to_A(pb_cnt, flag, a, b);
+	A_to_B(ra_cnt, flag, a, b, arr); //마지막자리 피봇을 ra 안해주기로 했기에 + 1
+	B_to_A(pb_cnt, flag, a, b, arr);
 }
