@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:28:29 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/30 18:10:02 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/30 20:09:09 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ typedef struct s_program
 	int					range;
 	int					error;
 	int					nbrneg;
+	int					pm_cnt;
+	int					flag;
+	int					len;
+	int					result;
+	int					sign;
+	int					cnt;
 }				t_program;
 
 typedef struct s_element
@@ -41,8 +47,8 @@ typedef struct s_swap
 
 void			atob(int r, t_element **a, t_element **b, t_swap *swap);
 unsigned int	my_strlen(const char *str, t_program *prgm);
-int				my_getnbr(char *str, t_program *prgm);
 void			my_putstr(char *str);
+int				my_atoi(char **str, t_program *prgm);
 
 t_element		*stack_init(int nb, char **arg, t_program *prgm);
 

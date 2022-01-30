@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:25:59 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/30 18:11:50 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/30 19:56:47 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,33 @@ void	prgm_init(t_program *prgm)
 	prgm->letter = 0;
 	prgm->nbrneg = 0;
 	prgm->range = 0;
+	prgm->pm_cnt = 0;
 }
 
-void	stack_free(int r, t_element **ab)
+void	check_stack(t_element *a, t_element *b)
 {
-	t_element	*next;
+	t_element	*temp;
 
-	while (r > 0)
+	temp = 0;
+	printf("A : ");
+	temp = a;
+	while (1 && temp)
 	{
-		if (r != 1)
-			next = (*ab)->next;
-		free(*ab);
-		*ab = next;
-		r--;
+		printf("%d ", temp->val);
+		temp = temp->next;
+		if ((a)->val == temp->val)
+			break ;
 	}
+	printf("\nB : ");
+	temp = b;
+	while (1 && temp)
+	{
+		printf("%d ", temp->val);
+		temp = temp->next;
+		if ((b)->val == temp->val)
+			break ;
+	}
+	printf("\n");
 }
 
 int	main(int nb, char **arg)
@@ -49,6 +62,6 @@ int	main(int nb, char **arg)
 	a = stack_init(nb, arg, &prgm);
 	if (error_check(&prgm, nb, a) == 1)
 		return (0);
-	atob(nb - 1, &a, &b, &swap);
+	atob(prgm.len, &a, &b, &swap);
 	return (0);
 }
