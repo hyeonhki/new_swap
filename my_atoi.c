@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 00:02:25 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/30 20:08:38 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/31 00:23:42 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,26 @@ void	set_prgm(t_program *prgm)
 	prgm->pm_cnt = 0;
 }
 
+void	letter_check(char *str, t_program *prgm)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!(str[i] >= '0' && str[i] <= '9'))
+		{
+			if (!(str[i] == '-' || str[i] == '+' || str[i] == ' '))
+				prgm->letter = 1;
+		}
+		i++;
+	}
+}
+
 int	my_atoi(char **str, t_program *prgm)
 {
 	set_prgm(prgm);
-	if (**str == '\0')
-		return (0);
+	letter_check(*str, prgm);
 	while (is_space(**str) == 1)
 		(*str)++;
 	while (**str == '+' || **str == '-')
