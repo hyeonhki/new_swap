@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:25:59 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/29 01:14:13 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/30 18:11:50 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,32 +18,6 @@ void	prgm_init(t_program *prgm)
 	prgm->letter = 0;
 	prgm->nbrneg = 0;
 	prgm->range = 0;
-}
-
-void	check_stack(t_element *a, t_element *b)
-{
-	t_element	*temp;
-
-	temp = 0;
-	printf("A : ");
-	temp = a;
-	while (1 && temp)
-	{
-		printf("%d ", temp->val);
-		temp = temp->next;
-		if ((a)->val == temp->val)
-			break ;
-	}
-	printf("\nB : ");
-	temp = b;
-	while (1 && temp)
-	{
-		printf("%d ", temp->val);
-		temp = temp->next;
-		if ((b)->val == temp->val)
-			break ;
-	}
-	printf("\n");
 }
 
 void	stack_free(int r, t_element **ab)
@@ -65,18 +39,16 @@ int	main(int nb, char **arg)
 	t_element	*a;
 	t_element	*b;
 	t_program	prgm;
-	int			flag;
-	int			*arr;
+	t_swap		swap;
 
 	a = NULL;
 	b = NULL;
-	arr = (int *)malloc((nb - 1) * sizeof(int));
+	swap.arr = (int *)malloc((nb - 1) * sizeof(int));
+	swap.flag = 0;
 	prgm_init(&prgm);
 	a = stack_init(nb, arg, &prgm);
 	if (error_check(&prgm, nb, a) == 1)
 		return (0);
-	flag = 0;
-	atob(nb - 1, &flag, &a, &b, arr);
-	free(arr);
+	atob(nb - 1, &a, &b, &swap);
 	return (0);
 }

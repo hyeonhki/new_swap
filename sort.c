@@ -6,11 +6,36 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:57:34 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/29 00:51:06 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/30 18:09:41 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	r_range(int r, t_element *b)
+{
+	int	i;
+	int	k;
+	int	ret;
+
+	k = 1;
+	i = b->val;
+	while (k < r)
+	{
+		b = b->next;
+		k++;
+	}
+	if (b->next->val == i)
+		ret = 0;
+	else
+		ret = 1;
+	while (k > 1)
+	{
+		b = b->prev;
+		k--;
+	}
+	return (ret);
+}
 
 int	check_sort(int r, t_element *temp)
 {
@@ -63,11 +88,7 @@ void	sort_three(t_element **a)
 	else
 	{
 		if ((*a)->val == max)
-		{
 			sab(a, "sa");
-			rrab(a, "rra");
-		}
-		else
-			rrab(a, "rra");
+		rrab(a, "rra");
 	}
 }

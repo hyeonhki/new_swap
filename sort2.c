@@ -6,124 +6,104 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:45:06 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/29 01:16:44 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/30 18:09:38 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	r_range(int r, t_element *b)
+void	set_vars(t_swap *swap, int *set1, int *set2)
 {
-	int	i;
-	int	k;
-	int	ret;
-
-	k = 1;
-	i = b->val;
-	while (k < r)
-	{
-		b = b->next;
-		k++;
-	}
-	if (b->next->val == i)
-		ret = 0;
-	else
-		ret = 1;
-	while (k > 1)
-	{
-		b = b->prev;
-		k--;
-	}
-	return (ret);
+	*set1 = 0;
+	*set2 = 0;
+	swap->i = 0;
 }
 
-void	btoa(int r, int *flag, t_element **a, t_element **b, int arr[])
+int	setting_b(int r, t_element **a, t_element **b, t_swap *swap)
 {
-	int			p;
-	int			i;
-	int			rb_cnt;
-	int			pa_cnt;
-
+	swap->flag = r_range(r, *b);
 	if (r == 0)
-		return ;
+		return (1);
 	else if (r == 1)
 	{
 		pab(a, b, "pa");
-		return ;
+		return (1);
 	}
-	*flag = r_range(r, *b);
-	rb_cnt = 0;
-	pa_cnt = 0;
-	i = r - 1;
-	pivot_sort(arr, &p, r, *b);
-	while (r > 0)
+	return (0);
+}
+
+void	btoa(int r, t_element **a, t_element **b, t_swap *swap)
+{
+	int			rb_cnt;
+	int			pa_cnt;
+
+	set_vars(swap, &rb_cnt, &pa_cnt);
+	if (setting_b(r, a, b, swap) == 1)
+		return ;
+	pivot_sort(swap->arr, &swap->p, r, *b);
+	while (r-- > 0)
 	{
-		if ((*b)->val < p)
+		if ((*b)->val < swap->p)
 		{
 			rab(b, "rb");
-			rb_cnt++;
+			(rb_cnt)++;
 		}
 		else
 		{
 			pab(a, b, "pa");
-			pa_cnt++;
+			(pa_cnt)++;
 		}
-		r--;
 	}
-	i = rb_cnt;
-	while (i-- > 0 && *flag != 0)
+	swap->i = rb_cnt;
+	while ((swap->i)-- > 0 && swap->flag != 0)
 		rrab(b, "rrb");
-	*flag = 1;
-	atob(pa_cnt, flag, a, b, arr);
-	btoa(rb_cnt, flag, a, b, arr);
+	atob(pa_cnt, a, b, swap);
+	btoa(rb_cnt, a, b, swap);
 }
 
-void	atob(int r, int *flag, t_element **a, t_element **b, int arr[])
+int	setting_a(int r, t_element **a, t_swap *swap)
 {
-	int	p;
-	int	i;
-	int	ra_cnt;
-	int	pb_cnt;
-
-	if (r == 0)
-		return ;
+	swap->flag = r_range(r, *a);
 	if (check_sort(r, *a) == 1)
-		return ;
-	*flag = r_range(r, *a);
+		return (1);
 	if (r == 2 && (*a)->val > (*a)->next->val)
 	{
-		if ((*a)->val > (*a)->next->val)
-			sab(a, "sa");
+		sab(a, "sa");
+		return (1);
+	}
+	else if (r == 3 && swap->flag == 0)
+	{
+		sort_three(a);
+		return (1);
+	}
+	return (0);
+}
+
+void	atob(int r, t_element **a, t_element **b, t_swap *swap)
+{
+	int			ra_cnt;
+	int			pb_cnt;
+
+	set_vars(swap, &ra_cnt, &pb_cnt);
+	if (setting_a(r, a, swap) == 1)
 		return ;
-	}
-	else if (r == 3)
+	pivot_sort(swap->arr, &swap->p, r, *a);
+	while (r-- > 0)
 	{
-		if (*flag == 0)
-			return (sort_three(a));
-	}
-	ra_cnt = 0;
-	pb_cnt = 0;
-	pivot_sort(arr, &p, r, *a);
-	i = r;
-	while (i > 0)
-	{
-		if ((*a)->val > p)
+		if ((*a)->val > swap->p)
 		{
 			rab(a, "ra");
-			ra_cnt++;
+			ra_cnt += 1;
 		}
 		else
 		{
 			pab(b, a, "pb");
-			pb_cnt++;
+			pb_cnt += 1;
 		}
-		i--;
 	}
-	if (ra_cnt == 0)
-		sab(b, "sb");
-	i = ra_cnt;
-	while (i-- > 0 && *flag != 0)
+	swap->i = ra_cnt;
+	while ((swap->i)-- > 0 && swap->flag != 0)
 		rrab(a, "rra");
-	atob(ra_cnt, flag, a, b, arr);
-	btoa(pb_cnt, flag, a, b, arr);
+	atob(ra_cnt, a, b, swap);
+	btoa(pb_cnt, a, b, swap);
 }

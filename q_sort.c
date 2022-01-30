@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:05:09 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/29 00:38:31 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/30 17:25:17 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	q_sort(int *arr, int left, int right)
 	}
 }
 
-void	pivot_sort(int arr[], int *p, int r, t_element *a)
+void	pivot_sort(int *arr, int *p, int r, t_element *a)
 {
 	int	i;
 	int	j;

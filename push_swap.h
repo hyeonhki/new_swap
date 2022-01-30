@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:28:29 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/29 01:14:22 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/30 18:10:02 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,15 @@ typedef struct s_element
 	struct s_element	*prev;
 }				t_element;
 
-void			atob(int r, int *flag, t_element **a, t_element **b, int *arr);
+typedef struct s_swap
+{
+	int					flag;
+	int					*arr;
+	int					i;
+	int					p;
+}				t_swap;
+
+void			atob(int r, t_element **a, t_element **b, t_swap *swap);
 unsigned int	my_strlen(const char *str, t_program *prgm);
 int				my_getnbr(char *str, t_program *prgm);
 void			my_putstr(char *str);
@@ -53,7 +61,8 @@ void			rr(t_element **a, t_element **b);
 void			sort_three(t_element **a);
 void			find_maxmin(int r, t_element *a, int *max, int *min);
 int				check_sort(int r, t_element *temp);
+int				r_range(int r, t_element *b);
 
-void			pivot_sort(int arr[], int *p, int r, t_element *a);
+void			pivot_sort(int *arr, int *p, int r, t_element *a);
 void			check_stack(t_element *a, t_element *b);
 #endif
