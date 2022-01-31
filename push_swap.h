@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:28:29 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/31 20:54:45 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:41:15 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_program
 	int					sign;
 	int					cnt;
 	int					sp;
+	int					empty;
 }				t_program;
 
 typedef struct s_element
