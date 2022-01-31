@@ -6,16 +6,19 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 00:02:25 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/31 00:23:42 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/31 20:55:18 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_space(char c)
+int	is_space(char c, t_program *prgm)
 {
 	if ((c >= 9 && c <= 13) || c == ' ')
+	{
+		prgm->sp = 1;
 		return (1);
+	}
 	else
 		return (0);
 }
@@ -56,6 +59,7 @@ void	set_prgm(t_program *prgm)
 	prgm->cnt = 0;
 	prgm->flag = 1;
 	prgm->pm_cnt = 0;
+	prgm->sp = 0;
 }
 
 void	letter_check(char *str, t_program *prgm)
@@ -78,7 +82,7 @@ int	my_atoi(char **str, t_program *prgm)
 {
 	set_prgm(prgm);
 	letter_check(*str, prgm);
-	while (is_space(**str) == 1)
+	while (is_space(**str, prgm) == 1)
 		(*str)++;
 	while (**str == '+' || **str == '-')
 	{
