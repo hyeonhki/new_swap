@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:05:09 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/30 17:25:17 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/31 15:18:00 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,16 @@ void	pivot_sort(int *arr, int *p, int r, t_element *a)
 	int	j;
 	int	cnt;
 
-	i = a->val;
+	i = r;
 	j = 0;
 	*p = 0;
 	cnt = 0;
-	while (1)
+	while (i-- > 0)
 	{
 		arr[j] = a->val;
 		a = a->next;
-		j++;
-		if (a->next->val == i)
-		{
-			arr[j++] = a->val;
-			break ;
-		}
 		cnt++;
+		j++;
 	}
 	while (cnt-- >= 0)
 		a = a->prev;

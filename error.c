@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:03:29 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/30 23:28:47 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/31 13:55:45 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int	error_check(t_program *prgm, int nb, t_element *a)
 {
 	if (prgm->letter == 1 || prgm->pm_cnt > 1)
-		return (msg_error("Error\nLetter is included.\n"));
+		return (msg_error("Error\n"));
 	if (prgm->range == 1)
-		return (msg_error("Error\nInt range\n"));
+		return (msg_error("Error\n"));
 	if (double_check(nb, a) == 1)
-		return (msg_error("Error\nDouble!\n"));
+		return (msg_error("Error\n"));
 	return (0);
 }
 

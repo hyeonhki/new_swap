@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:25:59 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/31 13:54:09 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/31 15:20:08 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int	main(int nb, char **arg)
 	b = NULL;
 	if (nb == 1)
 		return (0);
-	swap.arr = (int *)malloc((nb - 1) * sizeof(int));
 	swap.flag = 0;
 	prgm_init(&prgm);
 	a = stack_init(nb, arg, &prgm);
+	swap.arr = (int *)malloc((prgm.len) * sizeof(int));
 	if (error_check(&prgm, prgm.len + 1, a) == 1)
 		return (0);
 	atob(prgm.len, &a, &b, &swap);
