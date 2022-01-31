@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:25:59 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/30 23:52:50 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/31 13:54:09 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,6 @@ void	prgm_init(t_program *prgm)
 	prgm->range = 0;
 	prgm->pm_cnt = 0;
 	prgm->len = 0;
-}
-
-void	check_stack(t_element *a, t_element *b)
-{
-	t_element	*temp;
-
-	temp = 0;
-	printf("A : ");
-	temp = a;
-	while (1 && temp)
-	{
-		printf("%d ", temp->val);
-		temp = temp->next;
-		if ((a)->val == temp->val)
-			break ;
-	}
-	printf("\nB : ");
-	temp = b;
-	while (1 && temp)
-	{
-		printf("%d ", temp->val);
-		temp = temp->next;
-		if ((b)->val == temp->val)
-			break ;
-	}
-	printf("\n");
 }
 
 int	main(int nb, char **arg)
