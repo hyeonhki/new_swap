@@ -6,13 +6,12 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:28:29 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/31 00:23:35 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/31 17:00:09 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -70,5 +69,4 @@ int				check_sort(int r, t_element *temp);
 int				r_range(int r, t_element *b);
 
 void			pivot_sort(int *arr, int *p, int r, t_element *a);
-void			check_stack(t_element *a, t_element *b);
 #endif
