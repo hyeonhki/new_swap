@@ -6,7 +6,7 @@
 /*   By: hyeonhki <hyeonhki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 11:32:14 by hyeonhki          #+#    #+#             */
-/*   Updated: 2022/01/31 20:55:04 by hyeonhki         ###   ########.fr       */
+/*   Updated: 2022/01/31 21:38:37 by hyeonhki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_element	*stack_init(int nb, char **arg, t_program *prgm)
 		while (arg[i])
 		{
 			temp->val = my_atoi(&arg[i], prgm);
-			if (prgm->flag == 1 && ((prgm->pm_cnt == 1) || (prgm->sp == 1)))
+			if (prgm->flag == 1 && prgm->pm_cnt == 1)
 				prgm->letter = 1;
 			if (prgm->pm_cnt > 1 || prgm->range == 1 || prgm->letter == 1)
 				return (0);
